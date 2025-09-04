@@ -1,22 +1,22 @@
 const mongoose = require('mongoose');
 
 const foodPartnerSchema = new mongoose.Schema({
-    name: {
+    fullName: {
         type: String,
         required: true
     },
-    contactName: {
-        type: String,
-        required: true
-    },
-    phone: {
-        type: String,
-        required: true
-    },
-    address: {
-        type: String,
-        required: true
-    },
+    // contactName: {
+    //     type: String,
+    //     required: true
+    // },
+    // phone: {
+    //     type: String,
+    //     required: true
+    // },
+    // address: {
+    //     type: String,
+    //     required: true
+    // },
     email: {
         type: String,
         required: true,
@@ -28,6 +28,5 @@ const foodPartnerSchema = new mongoose.Schema({
     }
 })
 
-const foodPartnerModel = mongoose.model("foodpartner", foodPartnerSchema);
+module.exports = mongoose.model("foodpartner", foodPartnerSchema);
 
-module.exports = foodPartnerModel;

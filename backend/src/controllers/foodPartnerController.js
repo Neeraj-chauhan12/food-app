@@ -6,7 +6,7 @@ const jwt=require('jsonwebtoken')
 
 exports.foodPartnerRegister=async(req,res)=>{
 
-    const {fullName,email,password}=req.body;
+    const {fullName,email,password}=req.body
 
     try {
     const userAlreadyExits=await foodPartnerModel.findOne({email})

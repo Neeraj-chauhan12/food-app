@@ -2,6 +2,7 @@ const express = require("express")
 
 const userRouter=require('./routers/userRouter')
 const foodPartnerRouter=require('./routers/foodPartnerRouter')
+const foodRouter=require('./routers/foodRouter')
 const cookieParser = require('cookie-parser');
 
 
@@ -11,6 +12,7 @@ app.use(cookieParser());
 
 
 app.use('/api/auth/user',userRouter)
+app.use('/api/auth/food',foodRouter)
 app.use('/api/auth/food-partner',foodPartnerRouter)
 
 
