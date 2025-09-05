@@ -1,4 +1,5 @@
 const express = require("express")
+require("dotenv").config();
 
 const userRouter=require('./routers/userRouter')
 const foodPartnerRouter=require('./routers/foodPartnerRouter')
