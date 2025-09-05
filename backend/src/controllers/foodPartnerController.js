@@ -6,7 +6,7 @@ const jwt=require('jsonwebtoken')
 
 exports.foodPartnerRegister=async(req,res)=>{
 
-    const {fullName,email,password}=req.body
+    const {fullName,email,password,phone,address,contactName}=req.body
 
     try {
     const userAlreadyExits=await foodPartnerModel.findOne({email})
@@ -19,7 +19,10 @@ exports.foodPartnerRegister=async(req,res)=>{
     const foodPartner=await foodPartnerModel.create({
         fullName,
         email,
-        password:HashPassword
+        password:HashPassword,
+        phone,
+        address,
+        contactName
     })
 
     const token=jwt.sign({id:foodPartner._id},process.env.JWT_SECRET)

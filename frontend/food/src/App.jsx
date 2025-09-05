@@ -5,6 +5,7 @@ import UserLogin from './Auth/UserLogin'
 import FoodPartnerRegister from './Auth/FoodPartnerRegister'
 import FoodPartnerLogin from './Auth/FoodPartnerLogin'
 import Home from './Routers/Home'
+import {Toaster} from 'react-hot-toast'
 
 
 const App = () => {
@@ -18,7 +19,9 @@ const App = () => {
           <Route path="/partner/login" element={<FoodPartnerLogin />} />
 
       </Routes>
+      <Toaster />
     </BrowserRouter>
+  
   )
 }
 

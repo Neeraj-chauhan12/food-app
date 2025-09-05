@@ -1,14 +1,27 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import axios from 'axios';
+import toast from 'react-hot-toast';
 
 const UserLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setEmail("");
+    setPassword("");
     // Replace with API call
     const newUser = { email, password };
+    try {
+      const response = await axios.post('http://localhost:3000/api/auth/user/login', newUser);
+      console.log("User Login Success:", response.data);
+      toast.success(response.data.message);
+    } catch (error) {
+      console.error("User Login Error:", error);
+      toast.error(error.response?.data?.message || "Login failed. Please check your credentials.");
+    }
+
     console.log("User Login:", newUser);
   };
   return (

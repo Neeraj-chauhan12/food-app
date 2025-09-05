@@ -1,15 +1,29 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import axios from 'axios';
+import toast from 'react-hot-toast';
 
 const FoodPartnerLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setEmail("");
+    setPassword("");
     // Replace with API call
     const newPartner = { email, password };
     console.log("Food Partner Login:", newPartner);
+
+    try {
+      const response = await axios.post('http://localhost:3000/api/auth/partner/login', newPartner);
+      console.log("Food Partner Login Success:", response.data);
+      toast.success(response.data.message);
+    } catch (error) {
+      console.error("Food Partner Login Error:", error);
+      toast.error(error.response?.data?.message || "Login failed. Please check your credentials.");
+    }
+
   };
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900 transition-colors duration-300">
