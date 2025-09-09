@@ -18,7 +18,9 @@ const UserRegister = () => {
     
 
     try {
-      const response = await axios.post('http://localhost:3000/api/auth/user/register', newUser);
+      const response = await axios.post('http://localhost:3000/api/auth/user/register', newUser,{
+        withCredentials:true
+      });
       toast.success(response.data.message);
     } catch (error) {
       console.error("User Register Error:", error);

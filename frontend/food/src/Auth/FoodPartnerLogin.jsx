@@ -16,7 +16,9 @@ const FoodPartnerLogin = () => {
     console.log("Food Partner Login:", newPartner);
 
     try {
-      const response = await axios.post('http://localhost:3000/api/auth/partner/login', newPartner);
+      const response = await axios.post('http://localhost:3000/api/auth/partner/login', newPartner,{
+        withCredentials:true
+      });
       console.log("Food Partner Login Success:", response.data);
       toast.success(response.data.message);
     } catch (error) {

@@ -14,7 +14,9 @@ const UserLogin = () => {
     // Replace with API call
     const newUser = { email, password };
     try {
-      const response = await axios.post('http://localhost:3000/api/auth/user/login', newUser);
+      const response = await axios.post('http://localhost:3000/api/auth/user/login', newUser,{
+        withCredentials:true
+      });
       console.log("User Login Success:", response.data);
       toast.success(response.data.message);
     } catch (error) {

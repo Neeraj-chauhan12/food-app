@@ -6,8 +6,8 @@ const dbConnection=()=>{
     .then(()=>{
         console.log("mongodb is connected")
     })
-    .catch(()=>{
-        console.log("error in mongodb connection")
+    .catch((err)=>{
+        console.log("error in mongodb connection", err)
     })
 }
 
