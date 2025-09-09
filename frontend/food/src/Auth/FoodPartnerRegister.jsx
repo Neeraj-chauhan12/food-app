@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
@@ -11,6 +11,8 @@ const FoodPartnerRegister = () => {
   const [contactName, setContactName] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,6 +33,7 @@ const FoodPartnerRegister = () => {
       });
       console.log("Food Partner Register Success:", response.data);
       toast.success(response.data.message);
+      navigate("/Create") // Redirect to login after successful registration
     } catch (error) {
       console.error("Food Partner Register Error:", error);
       toast.error(error.response?.data?.message || "Registration failed. Please try again.");

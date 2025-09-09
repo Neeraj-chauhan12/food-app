@@ -4,8 +4,10 @@ import UserRegister from './Auth/UserRegister'
 import UserLogin from './Auth/UserLogin'
 import FoodPartnerRegister from './Auth/FoodPartnerRegister'
 import FoodPartnerLogin from './Auth/FoodPartnerLogin'
-import Home from './Routers/Home'
 import {Toaster} from 'react-hot-toast'
+import Home from './Pages/Home'
+import Profile from './Pages/Profile'
+import CreateReel from './Pages/CreateReel'
 
 
 const App = () => {
@@ -15,8 +17,14 @@ const App = () => {
            <Route path="/" element={<Home />} />
           <Route path="/user/register" element={<UserRegister />} />
           <Route path="/user/login" element={<UserLogin />} />
+          <Route path="/profile" element={<Profile />} />
+
           <Route path="/partner/register" element={<FoodPartnerRegister />} />
           <Route path="/partner/login" element={<FoodPartnerLogin />} />
+          <Route path='/create-food' element={<CreateReel />} />
+          
+          
+          
 
       </Routes>
       <Toaster />

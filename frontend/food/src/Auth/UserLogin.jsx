@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
 const UserLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,6 +20,7 @@ const UserLogin = () => {
       });
       console.log("User Login Success:", response.data);
       toast.success(response.data.message);
+      navigate("/"); // Redirect to home or dashboard
     } catch (error) {
       console.error("User Login Error:", error);
       toast.error(error.response?.data?.message || "Login failed. Please check your credentials.");

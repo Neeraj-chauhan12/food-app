@@ -16,3 +16,9 @@ exports.createFood=async(req,res)=>{
     res.status(201).json({message:"food created succuffully"})
 
 }
+
+
+exports.getFoodData=async(req,res)=>{
+    const foodItems=await foodModel.find({})
+    res.status(200).json({message:"Food items retrieved successfully", foodItems})
+}
