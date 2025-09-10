@@ -30,26 +30,20 @@ exports.likedFood=async(req,res)=>{
     const { foodId }=req.body;
     const user=req.user;
 
-    const isAlreadyLiked=await likeModel.findOne(
-        {
+    const isAlreadyLiked=await likeModel.findOne({
             user: user._id, 
-            food:foodId
+            food: foodId
         })
     if(isAlreadyLiked){
-        await likeModel.deleteOne({user:user._id, food:foodId})
-       
-        await foodModel.findByIdAndUpdate(foodId,
-        {$inc:{likeCount:-1}}
-    )
-    res.status(200).json({message:"Food item unliked successfully"})
+        await likeModel.deleteOne({user: user._id, food: foodId})
+        await foodModel.findByIdAndUpdate(foodId,{$inc:{likeCount:-1}})
+        res.status(200).json({message:"Food item unliked successfully", isAlreadyLiked})
     }
 
     const like= await likeModel.create({
-        user:user._id,
-        food:foodId,
+        user: user._id,
+        food: foodId,
     })
-
-
     await foodModel.findByIdAndUpdate(foodId,
         {$inc:{likesCount:1}}
     )
@@ -58,31 +52,26 @@ exports.likedFood=async(req,res)=>{
 }
 
 exports.savedFood=async(req,res)=>{
-    const {foodId}=req.body;
+    const { foodId }=req.body;
     const user=req.user;
 
-    const isAlreadySaved=await savedModel.findOne({user:user._id, food:foodId})
+    const isAlreadySaved=await savedModel.findOne({user: user._id, food: foodId})
     if(isAlreadySaved){
-        return res.status(400).json({message:"You have already saved this food item"})
-    }
+        await savedModel.deleteOne({user: user._id, food: foodId})
+        await foodModel.findByIdAndUpdate(foodId,{$inc:{savedCount:-1}})
+        res.status(200).json({message:"Food item unsaved successfully", isAlreadySaved})
+             
+    }    
 
-    await savedModel.findByIdAndUpdate(foodId,
-        {$inc:{savedCount:-1}}
-    )
-    res.status(200).json({message:"Food item unsaved successfully"})
-
-    const newSaved=new savedModel.create({
-        user:user._id,
-        food:foodId
+    const newSaved=await savedModel.create({
+        user: user._id,
+        food: foodId
     })
-    await newSaved.save();
-
     await foodModel.findByIdAndUpdate(foodId,
         {$inc:{savedCount:1}}
     )   
 
-    res.status(200).json({message:"Food item saved successfully"})
-
+    res.status(200).json({message:"Food item saved successfully", newSaved})
 }
 
 

@@ -3,6 +3,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import pic from '../../public/logo.jpg'
+import BottomNavigation from '../components/BottomNavigation';
 
 
 const Profile = () => {
@@ -70,6 +71,11 @@ const Profile = () => {
           </div>
         </div>
       </div>
+
+       <div className="fixed bottom-0 left-0 w-full flex justify-center items-center z-50">
+        <BottomNavigation />
+
+          </div>
     </div>
   );
 }

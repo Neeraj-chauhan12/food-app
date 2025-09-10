@@ -8,6 +8,7 @@ import {Toaster} from 'react-hot-toast'
 import Home from './Pages/Home'
 import Profile from './Pages/Profile'
 import CreateReel from './Pages/CreateReel'
+import SavedReel from './components/SavedReel'
 
 
 const App = () => {
@@ -22,9 +23,8 @@ const App = () => {
           <Route path="/partner/register" element={<FoodPartnerRegister />} />
           <Route path="/partner/login" element={<FoodPartnerLogin />} />
           <Route path='/create-food' element={<CreateReel />} />
-          
-          
-          
+
+          <Route path='/save' element={<SavedReel />} />
 
       </Routes>
       <Toaster />
