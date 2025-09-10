@@ -27,7 +27,7 @@ const FoodPartnerLogin = () => {
       });
       console.log("Food Partner Login Success:", response.data);
       toast.success(response.data.message);
-      navigate("/create") // Redirect to home or dashboard
+      navigate("/create-food") // Redirect to home or dashboard
     } catch (error) {
       console.error("Food Partner Login Error:", error);
       toast.error(error.response?.data?.message || "Login failed. Please check your credentials.");
