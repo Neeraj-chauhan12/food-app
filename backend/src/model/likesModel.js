@@ -1,16 +1,16 @@
 const mongoose = require('mongoose');
 
 const likesSchema = new mongoose.Schema({
-    userId: {
+    user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'user',
+        ref:'user',
         required: true
     },
-    foodItemId: {
+    food: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'food',
+        ref:'food',
         required: true
     }
 }, { timestamps: true });
 
-module.exports = mongoose.model('likes', likesSchema);
+module.exports = mongoose.model('like', likesSchema);

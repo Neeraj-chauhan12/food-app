@@ -58,8 +58,33 @@ const Home = () => {
     videoRefs.current.set(id, el)
   }
 
+const handlelikes=async(e)=>{
+  const response=await axios.post("http://localhost:3000/api/auth/food/like",{ foodId: e._id },{
+    withCredentials:true
+  })
+  console.log(response.data.like)
 
+  if(response.data.like){
+  
+    setVideos((prevVideos) =>
+      prevVideos.map((vid) =>
+        vid._id === e._id ? { ...vid, likeCount: vid.likeCount + 1 } : vid
+      )
+    )
+  }
+  else{
+    setVideos((prevVideos) =>
+      prevVideos.map((vid) =>
+        vid._id === e._id ? { ...vid, likeCount: vid.likeCount - 1 } : vid
+      )
+    )
+  }
 
+}
+
+const handlesaves=async(e)=>{
+  console.log("saved")
+}
   const containerRef = useRef(null);
   return (
     <div
@@ -83,25 +108,25 @@ const Home = () => {
           {/* Right side icons */}
           <div className="absolute right-4 bottom-32 flex flex-col gap-4 items-center z-20">
             <div className="flex flex-col items-center">
-              <button className="bg-black/60 rounded-full p-2 mb-1 border border-gray-700">
+              <button onClick={handlelikes} className="bg-black/60 rounded-full p-2 mb-1 border border-gray-700">
                 <FaRegHeart className="w-8 h-8 text-white" />
               </button>
-              <span className="text-white text-xs">{video.likes || 23}</span>
+              <span className="text-white text-xs">{video.likeCount ? video.likeCount : 0}</span>
             </div>
 
 
               <div className="flex flex-col items-center">
-              <button className="bg-black/60 rounded-full p-2 mb-1 border border-gray-700">
+              <button  className="bg-black/60 rounded-full p-2 mb-1 border border-gray-700">
                 <FaRegCommentDots className="w-8 h-8 text-white" />
               </button>
-              <span className="text-white text-xs">{video.comments || 45}</span>
+              <span className="text-white text-xs">{video.comments}</span>
             </div>
 
             <div className="flex flex-col items-center">
-              <button className="bg-black/60 rounded-full p-2 mb-1 border border-gray-700">
+              <button onClick={handlesaves} className="bg-black/60 rounded-full p-2 mb-1 border border-gray-700">
                 <FaRegBookmark className="w-8 h-8 text-white" />
               </button>
-              <span className="text-white text-xs">{video.saves || 23}</span>
+              <span className="text-white text-xs">{video.saveCount ? video.saveCount : 0}</span>
             </div>
             
             

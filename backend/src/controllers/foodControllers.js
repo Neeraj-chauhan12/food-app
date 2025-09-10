@@ -27,35 +27,38 @@ exports.getFoodData=async(req,res)=>{
 
 
 exports.likedFood=async(req,res)=>{
-    const foodId=req.body;
+    const { foodId }=req.body;
     const user=req.user;
 
-    const isAlreadyLiked=await foodModel.findOne({user:user._id, food:foodId})
+    const isAlreadyLiked=await likeModel.findOne(
+        {
+            user: user._id, 
+            food:foodId
+        })
     if(isAlreadyLiked){
-        return res.status(400).json({message:"You have already liked this food item"})
-    }
-
-    await foodModel.findByIdAndUpdate(foodId,
-        {$inc:{likesCount:-1}}
+        await likeModel.deleteOne({user:user._id, food:foodId})
+       
+        await foodModel.findByIdAndUpdate(foodId,
+        {$inc:{likeCount:-1}}
     )
     res.status(200).json({message:"Food item unliked successfully"})
+    }
 
-
-    const newLike=new likeModel.create({
+    const like= await likeModel.create({
         user:user._id,
-        food:foodId
+        food:foodId,
     })
-    await newLike.save();
+
 
     await foodModel.findByIdAndUpdate(foodId,
         {$inc:{likesCount:1}}
     )
-    res.status(200).json({message:"Food item liked successfully"})
+    res.status(200).json({message:"Food item liked successfully", like})
 
 }
 
 exports.savedFood=async(req,res)=>{
-    const foodId=req.body;
+    const {foodId}=req.body;
     const user=req.user;
 
     const isAlreadySaved=await savedModel.findOne({user:user._id, food:foodId})

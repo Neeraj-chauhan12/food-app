@@ -3,12 +3,12 @@ const mongoose = require('mongoose');
 
 
 const saveSchema = new mongoose.Schema({
-    userId: {
+    user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'user',
         required: true
     },
-    foodItemId: {
+    food: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'food',
         required: true
