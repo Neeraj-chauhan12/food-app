@@ -34,10 +34,11 @@ exports.likedFood=async(req,res)=>{
             user: user._id, 
             food: foodId
         })
+
     if(isAlreadyLiked){
         await likeModel.deleteOne({user: user._id, food: foodId})
         await foodModel.findByIdAndUpdate(foodId,{$inc:{likeCount:-1}})
-        res.status(200).json({message:"Food item unliked successfully", isAlreadyLiked})
+        return res.status(200).json({message:"Food item unliked successfully", isAlreadyLiked})
     }
 
     const like= await likeModel.create({
@@ -47,7 +48,7 @@ exports.likedFood=async(req,res)=>{
     await foodModel.findByIdAndUpdate(foodId,
         {$inc:{likesCount:1}}
     )
-    res.status(200).json({message:"Food item liked successfully", like})
+    return res.status(200).json({message:"Food item liked successfully", like})
 
 }
 
@@ -59,7 +60,7 @@ exports.savedFood=async(req,res)=>{
     if(isAlreadySaved){
         await savedModel.deleteOne({user: user._id, food: foodId})
         await foodModel.findByIdAndUpdate(foodId,{$inc:{savedCount:-1}})
-        res.status(200).json({message:"Food item unsaved successfully", isAlreadySaved})
+        return res.status(200).json({message:"Food item unsaved successfully", isAlreadySaved})
              
     }    
 
@@ -71,13 +72,13 @@ exports.savedFood=async(req,res)=>{
         {$inc:{savedCount:1}}
     )   
 
-    res.status(200).json({message:"Food item saved successfully", newSaved})
+    return res.status(200).json({message:"Food item saved successfully", newSaved})
 }
 
 
 exports.getSaveFood=async(req,res)=>{
     const user=req.user;
-    const savedFoods=await savedModel.find({user:user._id}).populate('foodItemId')
+    const savedFoods=await savedModel.find({user:user._id}).populate('food')
     if(!savedFoods || savedFoods.length===0){
         return res.status(404).json({message:"No saved food items found"})
     }

@@ -11,12 +11,9 @@ const Home = () => {
   useEffect(()=>{
   axios.get("http://localhost:3000/api/auth/food/data",{
     withCredentials:true
-
   }).
   then(res=>{
-    console.log(res.data.foodItems)
     setVideos(res.data.foodItems)
-    
     })
     .catch(err=>{
       console.log(err)
@@ -31,6 +28,7 @@ const handlelikes = async (video) => {
           { foodId: video._id },
           { withCredentials: true }
          );
+         console.log(response.data);
         if(response.data.like){
             console.log("Video liked");
             setVideos((prev) => prev.map((v) => v._id === video._id ? { ...v, likeCount: v.likeCount + 1 } : v))

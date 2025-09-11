@@ -65,7 +65,7 @@ const ReelsPart = ({ videos=[],onLike, onSave ,emptyMessage="no yet reel"}) => {
                   <button onClick={onLike ? () => onLike(video) : undefined} className="bg-black/60 rounded-full p-2 mb-1 border border-gray-700">
                     <FaRegHeart className="w-8 h-8 text-white" />
                   </button>
-                  <span className="text-white text-xs">{video.likeCount ? video.likeCount : 0}</span>
+                  <span className="text-white text-xs">{video.likeCount ?? video.likesCount ?? video.likeCount ?? 0}</span>
                 </div>
     
     
@@ -80,7 +80,7 @@ const ReelsPart = ({ videos=[],onLike, onSave ,emptyMessage="no yet reel"}) => {
                   <button onClick={onSave ? () => onSave(video) : undefined} className="bg-black/60 rounded-full p-2 mb-1 border border-gray-700">
                     <FaRegBookmark className="w-8 h-8 text-white" />
                   </button>
-                  <span className="text-white text-xs">{video.saveCount ? video.saveCount : 0}</span>
+                  <span className="text-white text-xs">{video.saveCount ?? video.saveCount ?? 0}</span>
                 </div>
                 
                 
