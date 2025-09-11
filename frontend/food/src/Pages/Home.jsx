@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import ReelsPart from '../components/ReelsPart';
+import { BACKEND_URL } from '../utiles/utiles';
 
 
 
@@ -9,7 +10,7 @@ const Home = () => {
   const [videos, setVideos] = useState([]);
 
   useEffect(()=>{
-  axios.get("http://localhost:3000/api/auth/food/data",{
+  axios.get(`${BACKEND_URL}/api/auth/food/data`,{
     withCredentials:true
   }).
   then(res=>{
@@ -24,7 +25,7 @@ const Home = () => {
 
 const handlelikes = async (video) => {
       const response = await axios.post(
-         "http://localhost:3000/api/auth/food/like",
+         `${BACKEND_URL}/api/auth/food/like`,
           { foodId: video._id },
           { withCredentials: true }
          );
@@ -40,7 +41,7 @@ const handlelikes = async (video) => {
 
 const handlesaves= async (item) =>{
   const response = await axios.post(
-    "http://localhost:3000/api/auth/food/save",
+    `${BACKEND_URL}/api/auth/food/save`,
     { foodId: item._id },
     { withCredentials: true }
   );

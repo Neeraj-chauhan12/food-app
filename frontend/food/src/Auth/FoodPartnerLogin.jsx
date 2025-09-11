@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { BACKEND_URL } from '../utiles/utiles';
 
 
 
@@ -22,7 +23,7 @@ const FoodPartnerLogin = () => {
     console.log("Food Partner Login:", newPartner);
 
     try {
-      const response = await axios.post('http://localhost:3000/api/auth/partner/login', newPartner,{
+      const response = await axios.post(`${BACKEND_URL}/api/auth/partner/login`, newPartner,{
         withCredentials:true
       });
       console.log("Food Partner Login Success:", response.data);

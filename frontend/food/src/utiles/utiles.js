@@ -1,0 +1,1 @@
+export const BACKEND_URL=' https://food-app-rhh7.onrender.com'

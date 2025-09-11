@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import ReelsPart from './ReelsPart';
 import axios from 'axios';
+import { BACKEND_URL } from '../utiles/utiles';
 
 const SavedReel = () => {
     const [videos, setVideos] = useState([]);
 
     useEffect(() => {
         // Fetch saved reels from API
-        axios.get('http://localhost:3000/api/auth/food/save', {
+        axios.get(`${BACKEND_URL}/api/auth/food/save`, {
             withCredentials: true
         })
         .then((response) => {
@@ -30,7 +31,7 @@ const SavedReel = () => {
 
     const removeSaved = async (item) => {
         try {
-            await axios.post("http://localhost:3000/api/auth/food/save", { foodId: item._id }, { withCredentials: true })
+            await axios.post(`${BACKEND_URL}/api/auth/food/save`, { foodId: item._id }, { withCredentials: true })
             setVideos((prev) => prev.map((v) => v._id === item._id ? { ...v, saveCount: Math.max(0, (v.saveCount ?? 1) - 1) } : v))
         } catch {
             // noop

@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import { BACKEND_URL } from '../utiles/utiles';
 
 
 const CreateReel = () => {
@@ -31,7 +32,7 @@ const CreateReel = () => {
     formData.append('name', name);
     formData.append('description', description);
 
-    await axios.post('http://localhost:3000/api/auth/food/', formData, {
+    await axios.post(`${BACKEND_URL}/api/auth/food/`, formData, {
       withCredentials: true,
       headers: {
         'Content-Type': 'multipart/form-data',

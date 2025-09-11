@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { BACKEND_URL } from '../utiles/utiles';
 
 const UserLogin = () => {
   const [email, setEmail] = useState("");
@@ -15,7 +16,7 @@ const UserLogin = () => {
     // Replace with API call
     const newUser = { email, password };
     try {
-      const response = await axios.post('http://localhost:3000/api/auth/user/login', newUser,{
+      const response = await axios.post(`${BACKEND_URL}/api/auth/user/login`, newUser,{
         withCredentials:true
       });
       console.log("User Login Success:", response.data);

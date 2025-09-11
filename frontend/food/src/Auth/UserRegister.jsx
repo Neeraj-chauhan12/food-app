@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { BACKEND_URL } from '../utiles/utiles';
 
 const UserRegister = () => {
   const [fullName, setFullName] = useState("");
@@ -19,7 +20,7 @@ const UserRegister = () => {
     
 
     try {
-      const response = await axios.post('http://localhost:3000/api/auth/user/register', newUser,{
+      const response = await axios.post(`${BACKEND_URL}/api/auth/user/register`, newUser,{
         withCredentials:true
       });
       toast.success(response.data.message);

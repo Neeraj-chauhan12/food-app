@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import pic from '../../public/logo.jpg'
 import BottomNavigation from '../components/BottomNavigation';
+import { BACKEND_URL } from '../utiles/utiles';
 
 
 const Profile = () => {
@@ -14,7 +15,7 @@ const Profile = () => {
 
 
   useEffect(() => {
-    axios.get(`http://localhost:3000/api/auth/partner/${id}`, {
+    axios.get(`${BACKEND_URL}/api/auth/partner/${id}`, {
       withCredentials: true
     }).then(res => {
       console.log(res.data);
