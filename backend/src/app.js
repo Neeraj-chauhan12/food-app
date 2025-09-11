@@ -10,7 +10,9 @@ const app=express()
 
 app.use(cors({
     origin: 'https://neeraj-food1.netlify.app', // Replace with your frontend URL
-    credentials: true
+    credentials: true,
+     methods:["GET","POST","UPDATE","DELETE","OPTIONS"],
+    allowedHeaders:["Content-Type","Authorization","X-Requested-With"]
 }));
 
 
