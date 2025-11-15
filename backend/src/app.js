@@ -9,7 +9,9 @@ const cookieParser = require('cookie-parser');
 const app=express()
 
 app.use(cors({
-    origin: 'https://neeraj-food1.netlify.app', // Replace with your frontend URL
+     origin: "http://localhost:5173" ,
+     // Replace with your frontend URL
+    // ||'https://neeraj-food1.netlify.app', 
     credentials: true,
      methods:["GET","POST","UPDATE","DELETE","OPTIONS"],
     allowedHeaders:["Content-Type","Authorization","X-Requested-With"]
