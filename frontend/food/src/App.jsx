@@ -1,50 +1,76 @@
-import React from 'react'
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
-import UserRegister from './Auth/UserRegister'
-import UserLogin from './Auth/UserLogin'
-import FoodPartnerRegister from './Auth/FoodPartnerRegister'
-import FoodPartnerLogin from './Auth/FoodPartnerLogin'
-import {Toaster} from 'react-hot-toast'
-import Home from './Pages/Home'
-import Profile from './Pages/Profile'
-import CreateReel from './Pages/CreateReel'
-import SavedReel from './components/SavedReel'
+import React from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import UserRegister from "./Auth/UserRegister";
+import UserLogin from "./Auth/UserLogin";
+import FoodPartnerRegister from "./Auth/FoodPartnerRegister";
+import FoodPartnerLogin from "./Auth/FoodPartnerLogin";
+import { Toaster } from "react-hot-toast";
+import Home from "./Pages/Home";
+import Profile from "./Pages/Profile";
+import CreateReel from "./Pages/CreateReel";
+import SavedReel from "./components/SavedReel";
+import PartnerProfile from "./Pages/PartnerProfile";
 
 // Check if user has authentication token
 const isAuthenticated = () => {
-  const token = localStorage.getItem('user')
-  return !!token
-}
+  const token = localStorage.getItem("user");
+  return !!token;
+};
+
+const isAuthenticatedPartner = () => {
+  const token = localStorage.getItem("partner");
+  return !!token;
+};
 
 // Protect routes that require authentication
 function PrivateRoute({ children }) {
-  return isAuthenticated() ? children : <Navigate to="/user/login" replace />
+  return isAuthenticated() ? (
+    children
+  ) : <Navigate to="/user/login" replace /> 
+
+}
+
+function PartnerRoute({ children }) {
+  return isAuthenticatedPartner() ? (
+    children
+  ) : <Navigate to="/partner/login" replace />;
 }
 
 // Redirect authenticated users away from login/register pages
 function PublicRoute({ children }) {
-  return isAuthenticated() ? <Navigate to="/" replace /> : children
+  return isAuthenticated() ? <Navigate to="/" replace /> : isAuthenticatedPartner() ? <Navigate to="/partner/profile" replace /> : children;
+}
+
+// Redirect authenticated partner away from login/register pages
+function PublicPartnerRoute({ children }) {
+  return isAuthenticatedPartner() ? <Navigate to="/partner/profile" replace /> : children;
 }
 
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Public routes - redirect to / if already logged in */}
-        <Route path="/user/register" element={<UserRegister />} />
-        <Route path="/user/login" element={<UserLogin />} />
-        <Route path="/partner/register" element={<FoodPartnerRegister />} />
-        <Route path="/partner/login" element={<FoodPartnerLogin />} />
+        {/* User Auth Routes */}
+        <Route path="/user/register" element={<PublicRoute><UserRegister /></PublicRoute>} />
+        <Route path="/user/login" element={<PublicRoute><UserLogin /></PublicRoute>} />
 
-        {/* Protected routes - redirect to login if not authenticated */}
+        {/* Partner Auth Routes */}
+        <Route path="/partner/register" element={<PublicPartnerRoute><FoodPartnerRegister /></PublicPartnerRoute>} />
+        <Route path="/partner/login" element={<PublicPartnerRoute><FoodPartnerLogin /></PublicPartnerRoute>} />
+
+        {/* User Protected Routes */}
         <Route path="/" element={<PrivateRoute><Home /></PrivateRoute>} />
         <Route path="/profile/:id" element={<PrivateRoute><Profile /></PrivateRoute>} />
-        <Route path="/create-food" element={<PrivateRoute><CreateReel /></PrivateRoute>} />
         <Route path="/save" element={<PrivateRoute><SavedReel /></PrivateRoute>} />
+
+        {/* Partner Protected Routes */}
+        <Route path="/create-food" element={<PartnerRoute><CreateReel /></PartnerRoute>} />
+        <Route path="/partner/profile" element={<PartnerRoute><PartnerProfile /></PartnerRoute>} />
+        <Route path="/partner/profile/:id" element={<PartnerRoute><PartnerProfile /></PartnerRoute>} />
       </Routes>
       <Toaster />
     </BrowserRouter>
-  )
-}
+  );
+};
 
-export default App
+export default App;

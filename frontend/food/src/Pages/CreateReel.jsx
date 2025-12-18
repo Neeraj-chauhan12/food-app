@@ -24,6 +24,9 @@ const CreateReel = () => {
     }
   };
 
+  const partner=JSON.parse(localStorage.getItem("partner"));
+  console.log(partner._id);
+
   const handleSubmit =async (e) => {
     e.preventDefault();
     // Handle form submission logic here
@@ -40,7 +43,7 @@ const CreateReel = () => {
     })
     .then((Response)=>{
       console.log(Response)
-      navigate("/"); // Redirect to home or dashboard
+      navigate(`/partner/profile/${partner._id}`); // Redirect to partner profile
       toast.success("Reel Uploaded Successfully")
     })
     .catch((err)=>{

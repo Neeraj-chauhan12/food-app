@@ -28,6 +28,7 @@ const FoodPartnerLogin = () => {
       });
       console.log("Food Partner Login Success:", response.data);
       toast.success(response.data.message);
+      localStorage.setItem("partner", JSON.stringify(response.data.foodPartner));
       navigate("/create-food") // Redirect to home or dashboard
     } catch (error) {
       console.error("Food Partner Login Error:", error);
