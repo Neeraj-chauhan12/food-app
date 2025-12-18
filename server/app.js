@@ -1,0 +1,38 @@
+const express = require("express")
+require("dotenv").config();
+const cors = require("cors")
+
+const userRouter=require('./src/routers/userRouter')
+const foodPartnerRouter=require('./src/routers/foodPartnerRouter')
+const foodRouter=require('./src/routers/foodRouter')
+const cookieParser = require('cookie-parser');
+const dbConnection = require("./src/db/dbconnection");
+const app=express()
+
+app.use(cors({
+     origin: "http://localhost:5173" ,
+  
+    credentials: true,
+     methods:["GET","POST","UPDATE","DELETE","OPTIONS"],
+    allowedHeaders:["Content-Type","Authorization","X-Requested-With"]
+}));
+
+
+
+app.use(express.json())
+app.use(cookieParser());
+
+
+app.use('/api/auth/user',userRouter)
+app.use('/api/auth/food',foodRouter)
+app.use('/api/auth/partner',foodPartnerRouter)
+
+dbConnection();
+
+const PORT=process.env.PORT || 5000
+app.listen(PORT,()=>{
+    console.log(`The app is running ${PORT} port`)
+})
+
+
+module.exports=app;

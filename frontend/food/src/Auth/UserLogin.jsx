@@ -21,6 +21,8 @@ const UserLogin = () => {
       });
       console.log("User Login Success:", response.data);
       toast.success(response.data.message);
+      localStorage.setItem("user", JSON.stringify(response.data.user));
+     // localStorage.setItem("authToken", token);
       navigate("/"); // Redirect to home or dashboard
     } catch (error) {
       console.error("User Login Error:", error);
