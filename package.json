@@ -2,9 +2,12 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon server/app.js",
+    "build":"npm install && npm install --prefix frontend/food && npm run build --prefix frontend/food",
+    "start": "node server/app.js"
+    
   },
   "keywords": [],
   "author": "",

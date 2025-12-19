@@ -27,7 +27,7 @@ exports.UserRegister=async(req,res)=>{
     res.status(200).json({message:"user register suuccessfull",user})
 }
 catch (error) {
-       res.status(500).json({error:"error in register page",error})
+       res.status(500).json({error:"error in register page",error});
        console.log(error)
     }
 
