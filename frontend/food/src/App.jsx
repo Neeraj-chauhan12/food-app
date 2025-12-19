@@ -10,11 +10,13 @@ import Profile from "./Pages/Profile";
 import CreateReel from "./Pages/CreateReel";
 import SavedReel from "./components/SavedReel";
 import PartnerProfile from "./Pages/PartnerProfile";
+import UserProfile from "./Pages/UserProfile";
 
 // Check if user has authentication token
 const isAuthenticated = () => {
-  const token = localStorage.getItem("user");
-  return !!token;
+  const user = localStorage.getItem("user");
+  const partner = localStorage.getItem("partner");
+  return !!(user || partner);
 };
 
 const isAuthenticatedPartner = () => {
@@ -38,12 +40,12 @@ function PartnerRoute({ children }) {
 
 // Redirect authenticated users away from login/register pages
 function PublicRoute({ children }) {
-  return isAuthenticated() ? <Navigate to="/" replace /> : isAuthenticatedPartner() ? <Navigate to="/partner/profile" replace /> : children;
+  return isAuthenticated() ? <Navigate to="/" replace /> : children;
 }
 
 // Redirect authenticated partner away from login/register pages
 function PublicPartnerRoute({ children }) {
-  return isAuthenticatedPartner() ? <Navigate to="/partner/profile" replace /> : children;
+  return isAuthenticatedPartner() ? <Navigate to="/" replace /> : children;
 }
 
 const App = () => {
@@ -61,6 +63,7 @@ const App = () => {
         {/* User Protected Routes */}
         <Route path="/" element={<PrivateRoute><Home /></PrivateRoute>} />
         <Route path="/profile/:id" element={<PrivateRoute><Profile /></PrivateRoute>} />
+        <Route path="/user/profile" element={<PrivateRoute><UserProfile /></PrivateRoute>} />
         <Route path="/save" element={<PrivateRoute><SavedReel /></PrivateRoute>} />
 
         {/* Partner Protected Routes */}

@@ -90,7 +90,13 @@ const CreateReel = () => {
             <textarea onChange={(e) => setDescription(e.target.value)} placeholder="Enter description" rows={2} className="w-full px-4 py-2 rounded border border-gray-300 bg-gray-50 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none" maxLength={100} />
           </div>
           <button type="submit" className="w-full py-2 rounded bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-colors">Upload Reel</button>
+          
+          
         </form>
+
+        <button onClick={() => navigate('/')} className="px-6 w-full py-2 bg-blue-600 text-white rounded font-semibold hover:bg-blue-700">
+            Home
+          </button>
       </div>
     </div>
   );

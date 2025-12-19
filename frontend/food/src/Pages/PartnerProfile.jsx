@@ -85,6 +85,9 @@ const PartnerProfile = () => {
 
         {/* Action Buttons */}
         <div className="flex gap-2 justify-center">
+            <button onClick={() => navigate('/')} className="px-6 py-2 bg-blue-600 text-white rounded font-semibold hover:bg-blue-700">
+            Home
+          </button>
           <button onClick={() => navigate('/create-food')} className="px-6 py-2 bg-blue-600 text-white rounded font-semibold hover:bg-blue-700">
             Create Reel
           </button>
