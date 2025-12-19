@@ -42,7 +42,7 @@ const CreateReel = () => {
       }
     })
     .then((Response)=>{
-      console.log(Response)
+      
       navigate(`/partner/profile/${partner._id}`); // Redirect to partner profile
       toast.success("Reel Uploaded Successfully")
     })

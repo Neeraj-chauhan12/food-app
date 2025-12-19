@@ -12,7 +12,7 @@ const SavedReel = () => {
             withCredentials: true
         })
         .then((response) => {
-            console.log('API response:', response.data);
+            
             const savedFoods = response.data.savedFoods.map((item) => ({
                     _id: item.food._id,
                     video: item.food.video,
@@ -21,7 +21,7 @@ const SavedReel = () => {
                     saveCount: item.food.saveCount,
                     foodPartner: item.food.foodPartner,
                 }))
-                console.log('Fetched saved reels:', savedFoods);
+              
                 setVideos(savedFoods)
             })
         .catch((error) => {

@@ -25,14 +25,14 @@ const FoodPartnerRegister = () => {
     setAddress("")
 
     const newPartner = { fullName, email, password, contactName, phone, address };
-    console.log("New Partner Data:", newPartner);
+    
 
     try {
       const response = await axios.post(`${BACKEND_URL}/api/auth/partner/register`, newPartner,{
         withCredentials:true
 
       });
-      console.log("Food Partner Register Success:", response.data);
+     
       toast.success(response.data.message);
       navigate("/Create") // Redirect to login after successful registration
     } catch (error) {

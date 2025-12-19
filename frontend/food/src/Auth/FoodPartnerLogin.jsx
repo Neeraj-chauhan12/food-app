@@ -26,7 +26,7 @@ const FoodPartnerLogin = () => {
       const response = await axios.post(`${BACKEND_URL}/api/auth/partner/login`, newPartner,{
         withCredentials:true
       });
-      console.log("Food Partner Login Success:", response.data);
+    
       toast.success(response.data.message);
       localStorage.setItem("partner", JSON.stringify(response.data.foodPartner));
       navigate("/") // Redirect to home after partner login

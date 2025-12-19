@@ -18,7 +18,6 @@ const Profile = () => {
     axios.get(`${BACKEND_URL}/api/auth/partner/${id}`, {
       withCredentials: true
     }).then(res => {
-      console.log(res.data);
       setProfileId(res.data.foodPartner);
       setVedios(res.data.foodPartner.foodItems);
     }).catch(err => {

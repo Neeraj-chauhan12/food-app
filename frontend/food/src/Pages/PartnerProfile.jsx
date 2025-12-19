@@ -23,10 +23,10 @@ const PartnerProfile = () => {
         const response = await axios.get(`${BACKEND_URL}/api/auth/partner/${id}`, {
           withCredentials: true
         })
-        console.log("food partenr ka data",response.data)
+       
         setPartner(response.data.foodPartner)
         setVideos(response.data.foodPartner.foodItems || [])
-        console.log("Videos:", response.data.foodPartner.foodItems)
+       
       } catch (err) {
         console.log(err)
       } finally {
